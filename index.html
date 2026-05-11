@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JOVI Math - Simulador</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header class="main-header">
+        <div class="logo">JOVI Math</div>
+        <nav>
+            <ul class="nav-links">
+                <li><a href="index.html">Simulador</a></li>
+                <li><a href="sobre.html">A Proposta</a></li>
+                <li><a href="equipe.html">Nossa Equipe</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="device-simulator">
+        <div class="device-mockup">
+            
+            <input type="radio" name="cam-mode" id="mode-foto" class="hidden-input" checked>
+            <input type="radio" name="cam-mode" id="mode-video" class="hidden-input">
+            <input type="radio" name="cam-mode" id="mode-math" class="hidden-input">
+            <input type="radio" name="cam-mode" id="mode-retrato" class="hidden-input">
+            
+            <input type="checkbox" id="show-solution" class="hidden-input">
+
+            <div class="camera-ui">
+                
+                <div class="camera-feed-bg"></div>
+
+                <header class="top-bar">
+                    <div class="left-icons math-ui">
+                        <button class="icon-btn">✕</button>
+                    </div>
+                    <div class="left-icons standard-ui" style="width: 24px;"></div> <div class="mode-indicator math-ui">
+                        <span class="dot"></span><span class="text">Math Mode</span>
+                    </div>
+
+                    <div class="right-icons" style="display: flex; gap: 16px;">
+                        <button class="icon-btn">⚡</button>
+                        <button class="icon-btn">⚙️</button>
+                    </div>
+                </header>
+
+                <section class="scanner-zone math-ui">
+                    <div class="scanner-frame">
+                        <div class="status-floating">⛶ Equação Detectada</div>
+                    </div>
+                </section>
+
+                <footer class="bottom-controls">
+                    
+                    <div class="action-row">
+                        <div class="brand-badge">ZEISS</div>
+                        
+                        <div class="shutter-wrapper standard-ui">
+                            <div class="shutter-button" style="background-color: transparent;">
+                                <div class="shutter-inner" style="border-color: white;"></div>
+                            </div>
+                        </div>
+
+                        <div class="shutter-wrapper math-ui">
+                            <label for="show-solution" class="shutter-button" style="background-color: #0055ff; box-shadow: 0 0 20px rgba(0,85,255,0.6);">
+                                <div class="shutter-inner"></div>
+                            </label>
+                        </div>
+                        
+                        <div class="brand-badge standard-ui" style="background: transparent; border: none;">1.0x</div>
+                        <label for="show-solution" class="action-badge math-ui">Resolver</label>
+                    </div>
+
+                    <nav class="bottom-nav">
+                        <label for="mode-foto" class="nav-item nav-foto">
+                            <div class="icon-circle">📷</div>
+                            <span>Foto</span>
+                        </label>
+                        <label for="mode-video" class="nav-item nav-video">
+                            <div class="icon-circle">🎥</div>
+                            <span>Vídeo</span>
+                        </label>
+                        <label for="mode-math" class="nav-item nav-math">
+                            <div class="icon-circle">✨</div>
+                            <span>Math</span>
+                        </label>
+                        <label for="mode-retrato" class="nav-item nav-retrato">
+                            <div class="icon-circle">👤</div>
+                            <span>Retrato</span>
+                        </label>
+                    </nav>
+                </footer>
+
+                <aside class="bottom-sheet">
+                    <header class="sheet-header">
+                        <div class="sheet-title-group">
+                            <div class="ai-icon">✨</div>
+                            <div>
+                                <h2 class="sheet-title">Solução Passo a Passo</h2>
+                                <span class="sheet-subtitle">Powered by Gemini AI</span>
+                            </div>
+                        </div>
+                        <label for="show-solution" class="close-sheet-btn">✕</label>
+                    </header>
+
+                    <div class="sheet-content">
+                        <div style="font-size: 13px; color: #2563eb; margin-bottom: 8px; font-weight: bold;">Equação Detectada:</div>
+                        <div class="equation-box">x² - 5x + 6 = 0</div>
+                        
+                        <div class="step-box">
+                            <strong>1. Identificar os coeficientes</strong><br><br>
+                            Forma padrão: ax² + bx + c = 0<br>
+                            a = 1, b = -5, c = 6
+                        </div>
+                        <div class="step-box">
+                            <strong>2. Calcular o discriminante (Δ)</strong><br><br>
+                            Δ = b² - 4ac<br>
+                            Δ = (-5)² - 4(1)(6) = 25 - 24 = 1
+                        </div>
+                        <div class="step-box">
+                            <strong>3. Raízes da Equação</strong><br><br>
+                            x = (-b ± √Δ) / 2a<br>
+                            x₁ = 3, x₂ = 2
+                        </div>
+
+                        <button class="primary-btn">📄 Copiar Solução</button>
+                    </div>
+                </aside>
+
+            </div>
+        </div>
+    </main>
+
+</body>
+</html>

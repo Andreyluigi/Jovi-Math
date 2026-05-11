@@ -1,0 +1,541 @@
+/* =========================================
+   RESET E VARIÁVEIS GERAIS
+   ========================================= */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: #e5e7eb;
+    color: #111827;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    overflow: hidden; /* Trava o scroll geral da página */
+}
+
+/* =========================================
+   MENU SUPERIOR GERAL (Das páginas web)
+   ========================================= */
+.main-header {
+    background-color: #0f172a;
+    padding: 0 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    height: 70px;
+    flex-shrink: 0;
+    z-index: 100;
+}
+
+.logo {
+    color: #00a3ff;
+    font-size: 24px;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+}
+
+.nav-links {
+    display: flex;
+    list-style: none;
+    gap: 24px;
+}
+
+.nav-links a {
+    color: #f8fafc;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 15px;
+    transition: color 0.3s ease;
+}
+
+.nav-links a:hover {
+    color: #00a3ff;
+}
+
+/* =========================================
+   SIMULADOR DE CELULAR (Tamanho Fixo Gigante)
+   ========================================= */
+.device-simulator {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start; /* Alinha no topo para permitir scroll */
+    height: calc(100vh - 70px);
+    padding: 40px 20px;
+    overflow-y: auto; /* Permite scroll apenas aqui se a tela for pequena */
+}
+
+.device-mockup {
+    width: 390px; /* Largura original do iPhone/Figma */
+    height: 844px; /* Altura original */
+    flex-shrink: 0; /* Impede o navegador de amassar o celular */
+    background-color: #0f172a;
+    border: 14px solid #1e293b;
+    border-radius: 48px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.6);
+}
+
+/* Container que segura a interface toda */
+.camera-ui {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+/* Fundo da Câmera (Com a imagem inserida) */
+.camera-feed-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('Gemini2_Generated_Image_5uz0e45uz0e45uz0.jpg');
+    background-size: cover;
+    background-position: center;
+    z-index: 1;
+}
+
+/* =========================================
+   INTERFACE DA CÂMERA (Glassmorphism e Layout)
+   ========================================= */
+.top-bar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 10;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 30px 24px 20px;
+    background: linear-gradient(to bottom, rgba(0,0,0,0.7) 0%, transparent 100%);
+}
+
+.icon-btn {
+    color: white;
+    font-size: 22px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+    transition: transform 0.2s;
+}
+
+.icon-btn:hover {
+    transform: scale(1.1);
+}
+
+.mode-indicator {
+    background: rgba(255, 255, 255, 0.15); /* Efeito Glassmorphism */
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 6px 14px;
+    border-radius: 20px;
+    color: white;
+    font-size: 12px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.mode-indicator .dot {
+    width: 6px;
+    height: 6px;
+    background: #3b82f6;
+    border-radius: 50%;
+    box-shadow: 0 0 8px #3b82f6; /* Brilho no ponto azul */
+}
+
+/* O Scanner no meio da tela */
+.scanner-zone {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 85%;
+    height: 45%;
+    z-index: 10;
+}
+
+.scanner-frame {
+    width: 100%;
+    height: 100%;
+    border: 2px solid #00a3ff;
+    border-radius: 24px;
+    position: relative;
+    box-shadow: 0 0 20px rgba(0, 163, 255, 0.3) inset, 0 0 20px rgba(0, 163, 255, 0.3);
+}
+
+.status-floating {
+    position: absolute;
+    top: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #00a3ff;
+    color: white;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: bold;
+    white-space: nowrap;
+    box-shadow: 0 4px 12px rgba(0, 163, 255, 0.4);
+}
+
+/* Controles Base */
+.bottom-controls {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    z-index: 10;
+    padding-bottom: 25px;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.95) 10%, rgba(0,0,0,0.6) 50%, transparent 100%);
+}
+
+.action-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 24px 30px;
+}
+
+.brand-badge {
+    background: rgba(0, 0, 0, 0.4);
+    color: white;
+    padding: 6px 12px;
+    border-radius: 16px;
+    font-size: 11px;
+    font-weight: bold;
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    border: 1px solid rgba(255,255,255,0.1);
+}
+
+.action-badge {
+    background: #0055ff;
+    color: white;
+    padding: 10px 18px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0, 85, 255, 0.4);
+}
+
+/* Botão Gatilho e Animação de Pulso */
+.shutter-wrapper {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.shutter-button {
+    width: 76px;
+    height: 76px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.shutter-button:active {
+    transform: scale(0.92);
+}
+
+.shutter-inner {
+    width: 58px;
+    height: 58px;
+    border: 3px solid white;
+    border-radius: 50%;
+}
+
+/* Animação do botão azul piscando (Microinteração) */
+@keyframes pulse-glow {
+    0% { box-shadow: 0 0 0 0 rgba(0, 85, 255, 0.7); }
+    70% { box-shadow: 0 0 0 15px rgba(0, 85, 255, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(0, 85, 255, 0); }
+}
+
+.math-ui .shutter-button {
+    animation: pulse-glow 2s infinite;
+}
+
+/* Menu Inferior Mobile */
+.bottom-nav {
+    display: flex;
+    justify-content: space-around;
+    padding: 0 10px;
+}
+
+.nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    color: rgba(255,255,255,0.5);
+    font-size: 11px;
+    font-weight: 600;
+    cursor: pointer;
+    width: 60px;
+    transition: color 0.3s ease;
+}
+
+.icon-circle {
+    width: 44px;
+    height: 44px;
+    background: rgba(255,255,255,0.1);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 20px;
+    transition: all 0.3s ease;
+}
+
+/* =========================================
+   A LÓGICA DE ABAS (SEM JS)
+   ========================================= */
+.hidden-input {
+    display: none;
+}
+
+.math-ui {
+    display: none !important;
+}
+
+.standard-ui {
+    display: none !important;
+}
+
+/* ESTADOS: FOTO, VIDEO, RETRATO (Modo Padrão) */
+#mode-foto:checked ~ .camera-ui .standard-ui,
+#mode-video:checked ~ .camera-ui .standard-ui,
+#mode-retrato:checked ~ .camera-ui .standard-ui {
+    display: flex !important;
+}
+
+#mode-foto:checked ~ .camera-ui .nav-foto,
+#mode-video:checked ~ .camera-ui .nav-video,
+#mode-retrato:checked ~ .camera-ui .nav-retrato {
+    color: white;
+}
+
+#mode-foto:checked ~ .camera-ui .nav-foto .icon-circle,
+#mode-video:checked ~ .camera-ui .nav-video .icon-circle,
+#mode-retrato:checked ~ .camera-ui .nav-retrato .icon-circle {
+    background: #3b82f6;
+    transform: scale(1.1); /* Efeito de crescimento suave */
+}
+
+/* ESTADO: MATH */
+#mode-math:checked ~ .camera-ui .math-ui {
+    display: flex !important;
+}
+
+#mode-math:checked ~ .camera-ui .nav-math {
+    color: white;
+}
+
+#mode-math:checked ~ .camera-ui .nav-math .icon-circle {
+    background: #0055ff;
+    transform: scale(1.1);
+}
+
+/* =========================================
+   BOTTOM SHEET (PAINEL GEMINI)
+   ========================================= */
+.bottom-sheet {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 85%;
+    background: white;
+    border-radius: 32px 32px 0 0;
+    z-index: 50;
+    padding: 24px;
+    transform: translateY(100%);
+    transition: transform 0.5s cubic-bezier(0.2, 1, 0.3, 1); /* Animação mais luxuosa */
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 -10px 40px rgba(0,0,0,0.3);
+}
+
+#show-solution:checked ~ .camera-ui .bottom-sheet {
+    transform: translateY(0);
+}
+
+.sheet-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 24px;
+    align-items: center;
+}
+
+.sheet-title-group {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.ai-icon {
+    background: linear-gradient(135deg, #3b82f6, #0055ff);
+    color: white;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    font-size: 18px;
+    box-shadow: 0 4px 10px rgba(59, 130, 246, 0.4);
+}
+
+.sheet-title {
+    color: #0f172a;
+    font-size: 18px;
+    font-weight: 800;
+}
+
+.sheet-subtitle {
+    font-size: 12px;
+    color: #64748b;
+    font-weight: 500;
+}
+
+.sheet-content {
+    overflow-y: auto;
+    padding-bottom: 20px;
+}
+
+.equation-box {
+    background: #f0fdf4; /* Verde super suave */
+    border: 1px solid #bbf7d0;
+    padding: 18px;
+    border-radius: 16px;
+    font-family: 'Courier New', monospace;
+    font-size: 24px;
+    color: #166534;
+    margin-bottom: 24px;
+    font-weight: bold;
+    text-align: center;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+}
+
+.step-box {
+    background: #ffffff;
+    padding: 16px;
+    border-radius: 12px;
+    margin-bottom: 16px;
+    border-left: 5px solid #3b82f6;
+    font-size: 14px;
+    color: #475569;
+    line-height: 1.6;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+}
+
+.step-box strong {
+    color: #0f172a;
+    font-size: 15px;
+    display: inline-block;
+    margin-bottom: 4px;
+}
+
+.close-sheet-btn {
+    background: #f1f5f9;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    font-size: 18px;
+    color: #64748b;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.close-sheet-btn:hover {
+    background: #e2e8f0;
+    color: #0f172a;
+}
+
+.primary-btn {
+    width: 100%;
+    background: #3b82f6;
+    color: white;
+    border: none;
+    padding: 18px;
+    border-radius: 16px;
+    font-size: 16px;
+    font-weight: 700;
+    margin-top: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+}
+
+.primary-btn:hover {
+    background: #2563eb;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(59, 130, 246, 0.4);
+}
+
+/* =========================================
+   PÁGINAS GERAIS (Sobre e Equipe Intactas)
+   ========================================= */
+.page-container {
+    overflow-y: auto;
+    height: calc(100vh - 70px);
+    padding-bottom: 40px;
+}
+
+.page-content {
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+.team-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 24px;
+    justify-content: center;
+}
+
+.team-member {
+    background: white;
+    padding: 30px 20px;
+    border-radius: 16px;
+    box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1);
+    text-align: center;
+    flex: 1 1 200px;
+    max-width: 220px;
+    border-top: 5px solid #0055ff;
+}
+
+.info-section {
+    background: white;
+    padding: 32px;
+    border-radius: 16px;
+    box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1);
+    margin-bottom: 24px;
+    line-height: 1.6;
+}
+
+.info-section h2 {
+    color: #0055ff;
+    margin-bottom: 16px;
+}
